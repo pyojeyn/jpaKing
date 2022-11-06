@@ -20,21 +20,28 @@ public class JpaMain {
 
         try {
             // JPQL : 대상이 객체 멤버 객체 다가져와
-            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-                    .setFirstResult(2)
-                    .setMaxResults(10)
-                    .getResultList();
-            // 1번부터 10개 가져와
-
-            for (Member member : result){
-                System.out.println("member.name = " + member.getName());
-            }
+//            List<Member> result = em.createQuery("select m from Member as m", Member.class)
+//                    .setFirstResult(3)
+//                    .setMaxResults(10)
+//                    .getResultList();
+//            // 1번부터 10개 가져와
+//
+//            for (Member member : result){
+//                System.out.println("member.name = " + member.getName());
+//            }
 
 
 
 
             // 처음 생성
-//            Member member = new Member();
+            Member member = new Member();
+            member.setId(1L);
+            member.setUsername("이민정");
+            member.setRoleType(RoleType.GUEST);
+
+            em.persist(member);
+
+
 //            member.setId(2L);
 //            member.setName("JungHoon");
 
