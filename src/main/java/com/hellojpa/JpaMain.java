@@ -19,45 +19,23 @@ public class JpaMain {
         tx.begin();
 
         try {
-            // JPQL : 대상이 객체 멤버 객체 다가져와
-//            List<Member> result = em.createQuery("select m from Member as m", Member.class)
-//                    .setFirstResult(3)
-//                    .setMaxResults(10)
-//                    .getResultList();
-//            // 1번부터 10개 가져와
-//
-//            for (Member member : result){
-//                System.out.println("member.name = " + member.getName());
-//            }
 
+            //저장
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
 
-
-
-            // 처음 생성
             Member member = new Member();
-            member.setId(1L);
-            member.setUsername("이민정");
-            member.setRoleType(RoleType.GUEST);
-
+            member.setUsername("member1");
+            member.setTeam(team);
             em.persist(member);
 
+            Member findMember = em.find(Member.class, member.getId());
+            List<Member> members = findMember.getTeam().getMembers();
 
-//            member.setId(2L);
-//            member.setName("JungHoon");
-
-            // 수정임. 찾아내서  set 만 해주면됨. 대박쿠.
-//            Member findMember = em.find(Member.class, 1L);
-//            findMember.setName("prettyJENNYBOO");
-
-            // 처음 조회 한명
-//            Member findMember = em.find(Member.class, 1L);
-//            System.out.println(findMember.getId());
-//            System.out.println(findMember.getName());
-
-            // 삭제임 초간단
-//            em.remove(findMember);
-
-//            em.persist(member);
+            for(Member m : members){
+                System.out.println("m = " + m.getUsername());
+            }
 
             tx.commit();
         }catch (Exception e){
