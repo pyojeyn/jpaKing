@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -22,6 +23,8 @@ public class Member {
     @ManyToOne
     @JoinColumn(name = "TEAM_ID") //team 의 어떤 컬럼으로 관계 맺을거임?
     private Team team;
+
+
 
     public Long getId() {
         return id;
@@ -45,6 +48,7 @@ public class Member {
 
     public void setTeam(Team team) {
         this.team = team;
+        team.getMembers().add(this);
     }
 //    public Long getTeamId() {
 //        return teamId;
