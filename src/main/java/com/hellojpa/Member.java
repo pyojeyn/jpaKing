@@ -1,5 +1,8 @@
 package com.hellojpa;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -16,15 +19,15 @@ public class Member {
     @Column(name = "USERNAME")
     private String username;
 
-//    @Column(name = "TEAM_ID")
-//    private Long teamId;
-
     // MEMBER 입장 MANY 한 MEMBER 가 각각 한(ONE) 팀에!!
     @ManyToOne
     @JoinColumn(name = "TEAM_ID") //team 의 어떤 컬럼으로 관계 맺을거임?
     private Team team;
 
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "e_role_type", nullable = false,
+            columnDefinition = "VARCHAR(32) COMMENT '등급 이름'")
+    private RoleType roleType;
 
     public Long getId() {
         return id;
@@ -50,11 +53,14 @@ public class Member {
         this.team = team;
         team.getMembers().add(this);
     }
-//    public Long getTeamId() {
-//        return teamId;
-//    }
-//
-//    public void setTeamId(Long teamId) {
-//        this.teamId = teamId;
-//    }
+
+    public void setRoleType(RoleType roleType){
+        this.roleType = roleType;
+    }
+
+    public RoleType getRoleType() {
+        return roleType;
+    }
+
+
 }

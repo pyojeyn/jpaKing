@@ -21,36 +21,24 @@ public class JpaMain {
         try {
 
             //저장
-
             Team team = new Team();
-            team.setName("TeamA");
-//            team.getMembers().add(member);
+            team.setName("어때");
             em.persist(team);
 
             Member member = new Member();
-            member.setUsername("member1");
+            member.setUsername("킹키");
+//            member.setRoleType(RoleType.LEADER);
+            member.setRoleType(RoleType.from("부리더"));
+
+            System.out.println("라벨은 단지 조회용이었음??");
+            System.out.println("member.getRoleType().getLabel() ==> " +  member.getRoleType().getLabel());
+            //member.getRoleType().getLabel() ==> 부리더
+            member.setTeam(team);
+
             em.persist(member);
-
-            team.addMember(member);
-
-//            team.getMembers().add(member);
-
-//            member.setTeam(team);
 
 //            em.flush();
 //            em.clear();
-
-
-            // 순수한 객체 상태임.
-            Team findTeam = em.find(Team.class, team.getId());
-
-            List<Member> members = findTeam.getMembers();
-            System.out.println("====================");
-            for(Member m : members){
-                System.out.println("m = " + m.getUsername());
-            }
-
-            System.out.println("====================");
             tx.commit();
         }catch (Exception e){
             tx.rollback();
