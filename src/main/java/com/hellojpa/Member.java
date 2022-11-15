@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +24,19 @@ public class Member {
     @ManyToOne
     @JoinColumn(name = "TEAM_ID") //team 의 어떤 컬럼으로 관계 맺을거임?
     private Team team;
+
+    // 일대일 관계
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
+
+    // 다대다 관계
+//    @ManyToMany
+//    @JoinTable(name = "MEMBER_PRODUCT")
+//    private List<Product> products = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member")
+    private List<MemberProduct> memberProducts = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
     @Column(name = "e_role_type", nullable = false,
