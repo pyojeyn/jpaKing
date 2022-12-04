@@ -28,7 +28,7 @@ public class ExtendExample {
             em.clear();
 
             Movie findMovie = em.find(Movie.class, movie.getId());
-            /**
+            /** 조인 전략 했을때.
              * select
              *         m.id as id,
              *         i.name as name,
@@ -42,6 +42,20 @@ public class ExtendExample {
              *             on m.id=i.id
              *     where
              *         m.id = 1
+             */
+
+            /** 싱글테이블 전략 했을 떄.
+             * select
+             *         id ,
+             *         name ,
+             *         price ,
+             *         actor ,
+             *         director
+             *     from
+             *         Item
+             *     where
+             *         id=1
+             *         and DTYPE='M'
              */
 
             System.out.println("findMovie=" + findMovie);
