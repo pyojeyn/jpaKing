@@ -27,7 +27,10 @@ public class ExtendExample {
             em.flush();
             em.clear();
 
-            Movie findMovie = em.find(Movie.class, movie.getId());
+//            Movie findMovie = em.find(Movie.class, movie.getId());
+
+            Item item = em.find(Item.class, movie.getId());
+            System.out.println("item={}" + item);
             /** 조인 전략 했을때.
              * select
              *         m.id as id,
@@ -58,7 +61,7 @@ public class ExtendExample {
              *         and DTYPE='M'
              */
 
-            System.out.println("findMovie=" + findMovie);
+
 
             tx.commit();
         }catch (Exception e){
