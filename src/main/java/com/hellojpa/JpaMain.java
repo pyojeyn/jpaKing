@@ -21,30 +21,27 @@ public class JpaMain {
 
         try {
 
+            // 영속성 깔끔
+            System.out.println("안녕!!");
+            // 아 이 밑에 부터 쿼리 안날라간거 멤버 프로덕트 때문이었음;;
             Member member = new Member();
-            member.setUsername("jane");
-            member.setCreatedBy("pyo");
-            member.setCreatedDate(LocalDateTime.now());
+            member.setUsername("hello");
 
-            //저장
-//            Team team = new Team();
-//            team.setName("어때");
-//            em.persist(team);
-//
-//            Member member = new Member();
-//            member.setUsername("킹키");
-////            member.setRoleType(RoleType.LEADER);
-//            member.setRoleType(RoleType.from("부리더"));
-//
-//            System.out.println("라벨은 단지 조회용이었음??");
-//            System.out.println("member.getRoleType().getLabel() ==> " +  member.getRoleType().getLabel());
-//            //member.getRoleType().getLabel() ==> 부리더
-//            member.setTeam(team);
-//
             em.persist(member);
-
             em.flush();
             em.clear();
+
+
+//            Member findMember = em.find(Member.class, member.getId());
+            Member findMember = em.getReference(Member.class, member.getId());
+            System.out.println("findMember.class="+ findMember.getClass());
+            System.out.println("findMember=" + findMember.getId());
+            System.out.println("findMember=" + findMember.getUsername());
+
+
+
+
+
             tx.commit();
         }catch (Exception e){
             tx.rollback();

@@ -17,6 +17,9 @@ public class ExtendExample {
 
         try {
 
+
+
+
             Movie movie = new Movie();
             movie.setDirector("봉준호");
             movie.setActor("신세경");
@@ -60,6 +63,9 @@ public class ExtendExample {
              *         id=1
              *         and DTYPE='M'
              */
+
+
+
 
 
 
