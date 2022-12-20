@@ -21,7 +21,7 @@ public class Member extends BaseEntity{
     private String username;
 
     // MEMBER 입장 MANY 한 MEMBER 가 각각 한(ONE) 팀에!!
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) // 지연로딩 -> 프록시 객첼로 조회 멤버만 디비에서 조회
     @JoinColumn(name = "TEAM_ID") //team 의 어떤 컬럼으로 관계 맺을거임?
     private Team team;
 
