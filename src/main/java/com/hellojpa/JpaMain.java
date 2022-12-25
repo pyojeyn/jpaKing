@@ -25,13 +25,13 @@ public class JpaMain {
 
 
             Team team = new Team();
-            team.setName("TEAMA");
+            team.setName("TEAM_A");
             em.persist(team);
             // 영속성 깔끔
-            System.out.println("안녕!!");
+
             // 아 이 밑에 부터 쿼리 안날라간거 멤버 프로덕트 때문이었음;;
             Member member = new Member();
-            member.setUsername("hello");
+            member.setUsername("member_1");
             member.setTeam(team);
             em.persist(member);
 
@@ -40,10 +40,12 @@ public class JpaMain {
             em.clear();
 
             Member m = em.find(Member.class, member.getId());
-            System.out.println("m = " + m.getTeam().getClass()); // class com.hellojpa.Team$HibernateProxy$57szDBdq
+            System.out.println("m = " + m.getTeam().getClass());
+            // LAZY :class com.hellojpa.Team$HibernateProxy$57szDBdq
+            //EAGER :  class com.hellojpa.Team 프록시 객체 사용 X
 
             System.out.println("==========");
-            m.getTeam().getName(); // 팀 디비 조회 
+            m.getTeam().getName();  // 초기화
             System.out.println("==========");
 //            Member member1 = new Member();
 //            member.setUsername("member1");
